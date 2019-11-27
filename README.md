@@ -8,6 +8,26 @@ See [SKILL_TEST.en.md](/SKILL_TEST.en.md) for the task details.
 go test -cover ./...
 ```
 
+or
+
+```shell
+./test.sh
+```
+
+```shell
+Running Suite: Api Suite
+========================
+Random Seed: 1574892063
+Will run 13 of 13 specs
+
+•••••••••••••
+Ran 13 of 13 Specs in 0.005 seconds
+SUCCESS! -- 13 Passed | 0 Failed | 0 Pending | 0 Skipped
+PASS
+coverage: 92.5% of statements
+ok  	github.com/m-rec/banner	0.129s
+```
+
 ## how to use
 
 ```shell
