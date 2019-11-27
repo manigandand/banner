@@ -7,8 +7,8 @@
     "height": 250,
     "repeat": 5,
     "is_active": true,
-    "start": "01:00",
-    "duration": 1800,
+    "start": "00:00",
+    "duration": 5400,
     "time_zone": "UTC"
   },
   {
@@ -21,6 +21,18 @@
     "is_active": true,
     "start": "01:30",
     "duration": 1800,
+    "time_zone": "UTC"
+  },
+  {
+    "id": 211,
+    "name": "banner_2_1",
+    "url": "https://media.buyee.jp/campaign/mercari191120/assets/img/title_text_en.png",
+    "width": 800,
+    "height": 250,
+    "repeat": 2,
+    "is_active": true,
+    "start": "01:30",
+    "duration": 1700,
     "time_zone": "UTC"
   },
   {
@@ -261,18 +273,6 @@
     "is_active": true,
     "start": "22:00",
     "duration": 7200,
-    "time_zone": "UTC"
-  },
-  {
-    "id": 23,
-    "name": "banner_23",
-    "url": "https://media.buyee.jp/campaign/mercari191120/assets/img/title_text_en.png",
-    "width": 800,
-    "height": 250,
-    "repeat": 2,
-    "is_active": true,
-    "start": "00:00",
-    "duration": 3600,
     "time_zone": "UTC"
   }
 ]

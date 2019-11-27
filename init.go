@@ -3,10 +3,28 @@ package banner
 // Adaptor interface expose Get banner method
 type Adaptor interface {
 	Add()
-	Get()
+	Get() (*Banner, error)
 }
 
 // NewBanner return the banner interface
-func NewBanner() Adaptor {
-	return &banner{}
+func NewBanner(timeZone string) (Adaptor, error) {
+	loc, err := loadLocation(timeZone)
+	if err != nil {
+		return nil, err
+	}
+
+	banners, err := loadBannersFromStub()
+	if err != nil {
+		return nil, err
+	}
+
+	adaptor := &Plugin{
+		clientTimeZone: timeZone,
+		timeZone:       loc,
+		banners:        banners,
+		bannersMap:     make(map[string]*Banner),
+	}
+	adaptor.toMap()
+
+	return adaptor, nil
 }
