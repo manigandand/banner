@@ -3,16 +3,11 @@ package main
 import (
 	"fmt"
 	"log"
-	"time"
 
 	"github.com/m-rec/banner"
 )
 
 func main() {
-	t := time.Now()
-	date := fmt.Sprintf("%d", t.Hour())
-	fmt.Println(date)
-	return
 	b, err := banner.NewBanner("Asia/Kolkata")
 	if err != nil {
 		log.Fatal(err)

@@ -3,13 +3,61 @@ package banner
 import (
 	"encoding/json"
 	"io/ioutil"
+	"net"
+	"strings"
 	"time"
 )
 
-var utcLoc *time.Location
+var (
+	utcLoc                                                  *time.Location
+	private16BitBlock, private20BitBlock, private24BitBlock *net.IPNet
+)
 
 func init() {
 	utcLoc, _ = loadLocation("UTC")
+	_, private24BitBlock, _ = net.ParseCIDR("10.0.0.0/8")
+	_, private20BitBlock, _ = net.ParseCIDR("172.16.0.0/12")
+	_, private16BitBlock, _ = net.ParseCIDR("192.168.0.0/16")
+}
+
+func checkIsInternalIP() bool {
+	ip := getExternalIP()
+	if strings.TrimSpace(ip) == "" {
+		return false
+	}
+
+	return isInternalIP(ip)
+}
+
+func getExternalIP() string {
+	ipadd := ""
+	addrs, err := net.InterfaceAddrs()
+	if err != nil {
+		return ipadd
+	}
+
+	for _, a := range addrs {
+		if ipnet, ok := a.(*net.IPNet); ok && !ipnet.IP.IsLoopback() {
+			if ipnet.IP.To4() != nil {
+				ipadd = ipnet.IP.String()
+			}
+		}
+	}
+
+	return ipadd
+}
+
+// isInternalIP checks if the given ip is internal/private or not
+func isInternalIP(ip string) bool {
+	private := false
+	IP := net.ParseIP(ip)
+	if IP == nil {
+		return private
+	}
+	private = private24BitBlock.Contains(IP) ||
+		private20BitBlock.Contains(IP) || private16BitBlock.Contains(IP)
+
+	return private
 }
 
 // loadLocation validates the given timezone string and returns the location

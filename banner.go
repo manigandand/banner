@@ -45,9 +45,16 @@ func (b *Plugin) Add(banner *Banner) error {
 // returns the first active banner
 func (b *Plugin) Get() (*Banner, error) {
 	currentTime := b.getClientTimeSec()
-
 	var activeBanners bannerSortByEndTime
+	isInternalIP := checkIsInternalIP()
+
 	for _, ban := range b.banners {
+		if isInternalIP {
+			if currentTime <= ban.endTimeSec {
+				activeBanners = append(activeBanners, ban)
+			}
+			continue
+		}
 		if ban.startTimeSec <= currentTime && currentTime <= ban.endTimeSec {
 			activeBanners = append(activeBanners, ban)
 		}
