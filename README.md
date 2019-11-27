@@ -24,17 +24,20 @@ import (
 )
 
 func main() {
-    banner := mercari.NewBanner()
-    // add a new banner item
-    b.Add()
+    b, err := banner.NewBanner("Asia/Kolkata")
+	if err != nil {
+		log.Fatal(err)
+	}
+	// add a new banner item
+	b.Add()
 
-    // get the first active banner
-    ban, err := banner.Get()
-    if err != nil {
-        log.Fatal(err)
-    }
+	// get the first active banner
+	ban, err := b.Get()
+	if err != nil {
+		log.Fatal(err)
+	}
 
-    log.Println(ban)
+	fmt.Println("Active banner: ", ban.Name, " URL: ", ban.URL)
 }
 
 ```
