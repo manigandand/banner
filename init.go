@@ -1,12 +1,12 @@
 package banner
 
-// Banner interface expose Get banner method
-type Banner interface {
+// Adaptor interface expose Get banner method
+type Adaptor interface {
 	Add()
 	Get()
 }
 
 // NewBanner return the banner interface
-func NewBanner() Banner {
+func NewBanner() Adaptor {
 	return &banner{}
 }
