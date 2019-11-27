@@ -1,0 +1,19 @@
+version: 2.1
+jobs:
+  test:
+    working_directory: ~/go/src/github.com/m-rec/45b44fc1b115311e1be0b63b0f6ae90751bf6f74
+    docker:
+      - image: circleci/golang:1.12
+    steps:
+      - checkout
+      - run:
+          command: |
+            go get golang.org/x/tools/cmd/cover
+      - run:
+          command: |
+            go test -v -cover -race -coverprofile=coverage.out
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - test
