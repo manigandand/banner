@@ -2,7 +2,6 @@ package banner
 
 import (
 	"encoding/json"
-	"errors"
 	"io/ioutil"
 	"time"
 )
@@ -18,7 +17,7 @@ func init() {
 func loadLocation(timeZone string) (*time.Location, error) {
 	loc, err := time.LoadLocation(timeZone)
 	if err != nil {
-		return nil, errors.New("invalid timezone: " + err.Error())
+		return nil, err
 	}
 	return loc, nil
 }
@@ -36,6 +35,7 @@ func loadBannersFromStub() ([]*Banner, error) {
 	}
 
 	for _, b := range banners {
+		b.IsActive = true
 		if err := b.loadBannerTimes(); err != nil {
 			return nil, err
 		}

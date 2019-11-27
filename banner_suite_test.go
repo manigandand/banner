@@ -1,13 +1,16 @@
 package banner_test
 
 import (
+	"fmt"
+	"strconv"
 	"testing"
+	"time"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )
 
-func TestApi(t *testing.T) {
+func TestBanner(t *testing.T) {
 	RegisterFailHandler(Fail)
 	RunSpecs(t, "Api Suite")
 }
@@ -31,4 +34,20 @@ func MainSetup() {
 // flush all the mock banner data
 func MainTearDown() {
 
+}
+
+func getFormatedTime(t time.Time, addH, addM int) string {
+	var hour, min string
+	h := t.Hour() + addH
+	m := t.Minute() + addM
+	hour = strconv.Itoa(h)
+	min = strconv.Itoa(m)
+	if h < 10 {
+		hour = fmt.Sprintf("0%d", h)
+	}
+	if m < 10 {
+		min = fmt.Sprintf("0%d", m)
+	}
+
+	return fmt.Sprintf("%s:%s", hour, min)
 }

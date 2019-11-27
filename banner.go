@@ -32,7 +32,7 @@ func (b *Plugin) Add(banner *Banner) error {
 	if err := banner.loadBannerTimes(); err != nil {
 		return err
 	}
-
+	banner.IsActive = true
 	b.banners = append(b.banners, banner)
 	b.mu.Lock()
 	b.bannersMap[banner.Name] = banner
@@ -59,6 +59,12 @@ func (b *Plugin) Get() (*Banner, error) {
 	}
 
 	return activeBanners[0], nil
+}
+
+// Clear resets the data
+func (b *Plugin) Clear() {
+	b.banners = []*Banner{}
+	b.bannersMap = make(map[string]*Banner)
 }
 
 // getClientTimeSec returns the current time in sec by client timezone

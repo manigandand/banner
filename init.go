@@ -4,6 +4,7 @@ package banner
 type Adaptor interface {
 	Add(banner *Banner) error
 	Get() (*Banner, error)
+	Clear()
 }
 
 // NewBanner return the banner interface
