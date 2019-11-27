@@ -1,8 +1,18 @@
 # mercari banner library
 
-# how to test
+See [SKILL_TEST.en.md](/SKILL_TEST.en.md) for the task details.
 
-# how to use
+## how to test
+
+```shell
+go test -cover ./...
+```
+
+## how to use
+
+```shell
+go get github.com/m-rec/45b44fc1b115311e1be0b63b0f6ae90751bf6f74
+```
 
 ```golang
 package main
