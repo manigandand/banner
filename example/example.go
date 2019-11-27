@@ -8,6 +8,8 @@ import (
 
 func main() {
 	fmt.Println("init")
-	banner.NewBanner()
+	b := banner.NewBanner()
+	b.Add()
+	b.Get()
 	fmt.Println("exit")
 }
