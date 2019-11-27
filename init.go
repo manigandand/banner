@@ -2,7 +2,7 @@ package banner
 
 // Adaptor interface expose Get banner method
 type Adaptor interface {
-	Add()
+	Add(banner *Banner) error
 	Get() (*Banner, error)
 }
 

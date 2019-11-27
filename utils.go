@@ -3,7 +3,6 @@ package banner
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
 	"io/ioutil"
 	"time"
 )
@@ -37,26 +36,12 @@ func loadBannersFromStub() ([]*Banner, error) {
 	}
 
 	for _, b := range banners {
-		loadBannerTimes(b)
+		if err := b.loadBannerTimes(); err != nil {
+			return nil, err
+		}
 	}
 
 	return banners, nil
-}
-
-// loadBannerTimes loads the banner times from the given start time in UTC
-func loadBannerTimes(b *Banner) {
-	t, err := time.Parse("15:04", b.Start)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	startTime := t.In(utcLoc)
-	endTime := startTime.Add(b.Duration * time.Second)
-
-	b.StartTime = startTime
-	b.StartTimeSec = timeToSec(startTime)
-	b.EndTime = endTime
-	b.EndTimeSec = timeToSec(endTime)
 }
 
 // FIXME: can be improved, handle the zero case

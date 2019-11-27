@@ -11,7 +11,7 @@ type bannerSortByEndTime []*Banner
 
 func (a bannerSortByEndTime) Len() int           { return len(a) }
 func (a bannerSortByEndTime) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
-func (a bannerSortByEndTime) Less(i, j int) bool { return a[i].EndTimeSec < a[j].EndTimeSec }
+func (a bannerSortByEndTime) Less(i, j int) bool { return a[i].endTimeSec < a[j].endTimeSec }
 
 // Plugin struct act as local store, which stores all the banners
 type Plugin struct {
@@ -24,8 +24,21 @@ type Plugin struct {
 
 // Add method implements the banner Adaptor interface
 // adds a new banner into the available list
-func (b *Plugin) Add() {
+func (b *Plugin) Add(banner *Banner) error {
+	if err := banner.ok(); err != nil {
+		return err
+	}
 
+	if err := banner.loadBannerTimes(); err != nil {
+		return err
+	}
+
+	b.banners = append(b.banners, banner)
+	b.mu.Lock()
+	b.bannersMap[banner.Name] = banner
+	b.mu.Unlock()
+
+	return nil
 }
 
 // Get method implements the banner Adaptor interface
@@ -35,7 +48,7 @@ func (b *Plugin) Get() (*Banner, error) {
 
 	var activeBanners bannerSortByEndTime
 	for _, ban := range b.banners {
-		if ban.StartTimeSec <= currentTime && currentTime <= ban.EndTimeSec {
+		if ban.startTimeSec <= currentTime && currentTime <= ban.endTimeSec {
 			activeBanners = append(activeBanners, ban)
 		}
 	}
