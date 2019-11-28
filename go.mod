@@ -1,4 +1,4 @@
-module github.com/m-rec/banner
+module github.com/manigandand/banner
 
 go 1.12
 

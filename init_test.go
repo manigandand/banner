@@ -1,7 +1,7 @@
 package banner_test
 
 import (
-	"github.com/m-rec/banner"
+	"github.com/manigandand/banner"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )

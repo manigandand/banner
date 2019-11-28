@@ -1,7 +1,7 @@
 version: 2.1
 jobs:
   test:
-    working_directory: ~/go/src/github.com/m-rec/45b44fc1b115311e1be0b63b0f6ae90751bf6f74
+    working_directory: ~/go/src/github.com/manigandand/banner
     docker:
       - image: circleci/golang:1.12
     steps:

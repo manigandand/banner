@@ -25,13 +25,13 @@ Ran 13 of 13 Specs in 0.005 seconds
 SUCCESS! -- 13 Passed | 0 Failed | 0 Pending | 0 Skipped
 PASS
 coverage: 92.5% of statements
-ok  	github.com/m-rec/banner	0.129s
+ok  	github.com/manigandand/banner	0.129s
 ```
 
 ## how to use
 
 ```shell
-go get github.com/m-rec/45b44fc1b115311e1be0b63b0f6ae90751bf6f74
+go get github.com/manigandand/45b44fc1b115311e1be0b63b0f6ae90751bf6f74
 ```
 
 ```golang
@@ -39,9 +39,9 @@ package main
 
 import (
 	"fmt"
-    "log"
-    // mercari "github.com/m-rec/45b44fc1b115311e1be0b63b0f6ae90751bf6f74"
-    mercari "github.com/m-rec/banner"
+	"log"
+
+    mercari "github.com/manigandand/banner"
 )
 
 func main() {

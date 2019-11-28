@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/m-rec/banner"
+	"github.com/manigandand/banner"
 )
 
 func main() {
